@@ -71,14 +71,78 @@ class CoursesController < ApplicationController
   end
 
   def select
-    @course=Course.find_by_id(params[:id])
-    current_user.courses<<@course
-    flash={:suceess => "成功选择课程: #{@course.name}"}
-    redirect_to courses_path, flash: flash
-  end
+      flag = nil
+      @courses = current_user.courses
+      @course = Course.find_by_id(params[:id])
+       @courses.each do |course|
+        temp = timeSplit(course.course_time.to_s,"(")##weekday
+        temp1 = timeSplit(temp[1].to_s,")")###9-11  第2-20周
+        temp2 = timeSplit(@course.course_time.to_s,"(")#周一(9-11)
+        temp3 = timeSplit(temp2[1].to_s,")")##7-9
+        temp4 = timeSplit(temp1[0].to_s,"-")
+        temp5 = timeSplit(temp3[0].to_s,"-")
+        temp6 = time_conflict(temp4[0].to_i,temp4[1].to_i,temp5[0].to_i,temp5[1].to_i)###上课时间判断
+        is_week_conflict = timeSplit(course.course_week,"-")
+        num12 = is_week_conflict[1].to_i###20
+        is_week_conflict_temp = timeSplit(is_week_conflict[0].to_s,"第")
+        num11 = is_week_conflict_temp[1].to_i
+        now_course_week =timeSplit(@course_week,"-")
+        num14 = now_course_week[1].to_i
+        now_course_week_temp = timeSplit(now_course_week[0],"第")
+        num13 = now_course_week_temp[1].to_i
+        @temp7 = time_conflict(num11,num12,num13,num14)
+
+         if(temp[0] == temp2[0] && temp6.nil? && @temp7.nil?)
+           flash[:danger] = "时间冲突"                                                                                                                                                                                                  
+           flag = true
+           redirect_to courses_path
+           break                                                                                                                                                                                             
+         end
+
+        end
+      if(flag.nil? && @course.student_num <= @course.limit_num && !@temp7.nil?)
+        student_num=@course.student_num
+        student_num += 1
+        @course.update_attribute(:student_num,student_num)
+        # @course.student_num = student_num
+        current_user.courses<<@course
+        flash={:suceess => "成功选择课程: #{@course.name}"}
+       redirect_to courses_path, flash: flash
+       elsif(@course.student_num > @course.limit_num)
+        flash={:danger => "选课人数已满"}
+        redirect_to courses_path, flash: flash
+      end
+
+
+
+    # flag = true
+    # @courses = current_user.courses
+    # @course=Course.find_by_id(params[:id])
+    # # @degree_course = params[:choice]
+    # # if(!@degree_course)
+    # #   flash={:danger => "#{@degree_course}"}
+    # #   redirect_to courses_path,flash:flash
+    # # elsif
+    #  @courses.each do |i|
+    #   temp = timeSplit(i.course_time.to_s,"(")##weekday
+    #   temp1 = timeSplit(temp[1].to_s,")")###9-11
+    #   temp2 = timeSplit(@course.course_time.to_s,"(")
+    #   temp3 = timeSplit(temp2[1].to_s,")")##7-9
+    #   temp4 = timeSplit(temp1[0].to_s,"-")
+    #   temp5 = timeSplit(temp3[0].to_s,"-")
+    #   temp6 = searchTime(temp4[0].to_i,temp4[1].to_i,temp5[0].to_i,temp5[1].to_i)
+    #    if(temp[0] == temp2[0] && temp6 )
+    #     flash[:danger] = "time     conflict"                                                                                                                                                                                                  
+    #     flag = nil
+    #     redirect_to courses_path
+    #    end
+ end    
 
   def quit
     @course=Course.find_by_id(params[:id])
+    student_num=@course.student_num
+    student_num -= 1
+    @course.update_attribute(:student_num,student_num)
     current_user.courses.delete(@course)
     flash={:success => "成功退选课程: #{@course.name}"}
     redirect_to courses_path, flash: flash
@@ -120,6 +184,31 @@ class CoursesController < ApplicationController
     params.require(:course).permit(:course_code, :name, :course_type, :teaching_type, :exam_type,
                                    :credit, :limit_num, :class_room, :course_time, :course_week)
   end
+  
+
+  def timeSplit(strings,symbol)
+    # return string.split(symbol)
+    strings.to_s.split(symbol)
+  end
+
+  def time_conflict(num1,num2,num3,num4)##Fnum ==Frist num Snum=Second num Tnum=Third num FO=fourth num
+     flag1 = false
+
+    (num1..num2).each do |time1|
+      (num3..num4).each do|time2|
+        if (time1 == time2)
+          flag1 = true
+          return nil
+          break
+        end
+       end
+       if(flag1)
+        break
+       end
+
+    end
+  end
+
 
 
 end
