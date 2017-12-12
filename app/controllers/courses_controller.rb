@@ -70,10 +70,23 @@ class CoursesController < ApplicationController
     @course=tmp
   end
 
+  def describe
+    @course = Course.find_by_id(params[:id])
+    render '/courses/description'   #@course.description 
+  end
+
   def select
+
       flag = nil
       @courses = current_user.courses
       @course = Course.find_by_id(params[:id])
+      #-----------------------------add_degree_course
+      degree_course_value = params[:flag]
+      # flash[:success] = degree_course_value
+      if(degree_course_value)
+      @course.update_attribute(:course_degree,degree_course_value)
+      end
+      #-----------------------
        @courses.each do |course|
         temp = timeSplit(course.course_time.to_s,"(")##weekday
         temp1 = timeSplit(temp[1].to_s,")")###9-11  第2-20周
@@ -154,6 +167,17 @@ class CoursesController < ApplicationController
   def index
     @course=current_user.teaching_courses.paginate(page: params[:page], per_page: 4) if teacher_logged_in?
     @course=current_user.courses.paginate(page: params[:page], per_page: 4) if student_logged_in?
+    total_scores = 0
+    total_degree_score = 0
+     @course.each do |course|
+      temp = timeSplit(course.credit,"/")
+      total_scores += temp[1].to_i
+      if(course.course_degree)
+        total_degree_score += temp[1].to_i
+      end
+     end
+     @total_scores =total_scores
+     @total_degree_score = total_degree_score
   end
 
 
@@ -182,7 +206,7 @@ class CoursesController < ApplicationController
 
   def course_params
     params.require(:course).permit(:course_code, :name, :course_type, :teaching_type, :exam_type,
-                                   :credit, :limit_num, :class_room, :course_time, :course_week)
+                                   :credit, :limit_num, :class_room, :course_time, :course_week,:description)
   end
   
 

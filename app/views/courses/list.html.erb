@@ -1,4 +1,4 @@
- <div class="container-fluid">
+<!--  <div class="container-fluid">
   <div class="row">
     <div class="col-sm-2">
       <%= render "shared/sidenav" %>
@@ -15,6 +15,7 @@
 
             <tr>
               <th>课程编号</th>
+              <th>是否为学位课</th>
               <th>课程名称</th>
               <th>课时/学分</th>
               <th>限选</th>
@@ -32,6 +33,7 @@
                 <tr>
 
                   <td><%= course.course_code %></td>
+                  <td><input id="checkbox1" type="checkbox" name="degree course" value ="true"/>是</td>
                   <td><%= course.name %></td>
                   <td><%= course.credit %></td>
                   <td><%= course.limit_num %></td>
@@ -39,8 +41,11 @@
                   <td><%= course.course_type %></td>
                   <td><%= course.teaching_type %></td>
                   <td><%= course.exam_type %></td>
-                  <td><%= course.teacher.name %></td>
-                  <td><%= link_to "加入课程", select_course_path(course), class: 'btn-sm btn-info' %></td>
+                  <td><%= course.teacher.name %></td> 
+                  <input type="hidden" id="course" value="<%= course.id %>"/>
+
+            <!--     <td><%= link_to "加入课程", select_course_url(course), class: 'btn-sm btn-info' %></td> --> 
+   <!--               <td><input id="button1" type="button" class="btn-sm btn-info" value="加入课程" onclick = "ci()"></td> 
 
                 </tr>
             <% end %>
@@ -52,7 +57,25 @@
     </div>
   </div>
 </div> 
-<!-- <div class="container-fluid">
+<script type="text/javascript">
+  flag = false;
+  function ci(){
+    var InputNum=document.getElementsByTagName("input")
+        for (var i=0;i<InputNum.length;i++){
+          if(InputNum[i].checked)
+            flag=true;
+            }
+    var course= document.getElementById("course").value;
+
+  window.location.href= "http://localhost:3000/courses/"+course+"/select";
+  // alert("http://localhost:3000/courses/"+course+"/select");
+
+
+          
+    }
+
+</script> --> 
+<div class="container-fluid">
   <div class="row">
     <div class="col-sm-2">
       <%= render "shared/sidenav" %>
@@ -69,6 +92,7 @@
 
             <tr>
               <th>课程编号</th>
+              <th>是否为学位课</th>
               <th>课程名称</th>
               <th>课时/学分</th>
               <th>限选</th>
@@ -86,6 +110,7 @@
                 <tr>
 
                   <td><%= course.course_code %></td>
+                  <td><input id="checkbox1" type="checkbox" name="degree course" value ="true"/>是</td>
                   <td><%= course.name %></td>
                   <td><%= course.credit %></td>
                   <td><%= course.limit_num %></td>
@@ -94,7 +119,9 @@
                   <td><%= course.teaching_type %></td>
                   <td><%= course.exam_type %></td>
                   <td><%= course.teacher.name %></td>
-                  <td><%= link_to "加入课程", select_course_path(course), class: 'btn-sm btn-info' %></td>
+                  <input type="hidden" id="course" value="<%= course.id %>">
+                  <td><input id="button1" type="button" class="btn-sm btn-info" value="加入课程" onclick = "ci()"></td> 
+       <!--            <td><%= link_to "加入课程", select_course_path(course), class: 'btn-sm btn-info' %></td> -->
 
                 </tr>
             <% end %>
@@ -105,6 +132,23 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  flag = false;
+  function ci(){
+    var InputNum=document.getElementsByTagName("input")
+        for (var i=0;i<InputNum.length;i++){
+          if(InputNum[i].checked)
+            flag=true;
+            }
+    var course= document.getElementById("course").value;
+
+  window.location.href= "http://localhost:3000/courses/"+course+"/select?flag="+flag;
+  // alert("http://localhost:3000/courses/"+course+"/select/course?"+flag);
 
 
- -->
+          
+    }
+
+</script>
+
+
