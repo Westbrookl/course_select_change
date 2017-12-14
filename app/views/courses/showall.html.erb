@@ -1,0 +1,70 @@
+<!-- <!-- <!-- <p>test --> 
+
+<!-- Monday
+<% @course1.each do |course|%>
+
+<p><%= course.name%></p>
+<% end %>
+Thur
+<% @course2.each do |course|%>
+
+<p><%= course.name%></p>
+<% end %>
+Wen
+<% @course3.each do |course|%>
+
+<p><%= course.name%></p>
+<% end %>
+Thue
+<% @course4.each do |course|%>
+
+<p><%= course.name%></p>
+<% end %>
+Fri
+<% @course5.each do |course|%>
+
+<p><%= course.name%></p>
+<% end %>
+Sat
+<% @course6.each do |course|%>
+
+<p><%= course.name%></p>
+<% end %>
+Sun
+<% @course7.each do |course|%>
+
+<p><%= course.name%></p>
+<% end %>
+ -->
+
+<!-- 
+
+
+ --> 
+<!-- 
+         <% @courses.each do |course| %>
+                <tr>
+
+                  <td><%= course.course_code %></td>
+                 
+                  <td><%= course.name %></td>
+                  <td><%= course.credit %></td>
+                  <td><%= course.limit_num %></td>
+                  <td><%= course.student_num %></td>
+                  <td><%= course.course_type %></td>
+                  <td><%= course.teaching_type %></td>
+                  <td><%= course.exam_type %></td>
+                  <td><%= course.teacher.name %></td>
+                 </tr>
+             <% end%>
+</p>
+  -->
+
+ <h2>周一_________ 周二_________周三_________周四_________周五_________周六_________周日</h2>
+ <% @Mon_course.each do |course|%>
+ <% if course[:name]==""%>
+ <p> &nbsp;&nbsp;&nbsp;&nbsp;| </p>
+ <% else%>
+  <p><%= course[:name]%>|</p>
+<% end%>
+<% end %>

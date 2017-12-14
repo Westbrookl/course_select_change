@@ -1,3 +1,20 @@
-<h1>关于这门课程的描述</h1>
+<h1>课程详情</h1>
+   <div class="panel-heading">
+       <h2 class="panel-title">上课教室: &nbsp;&nbsp;<%= @course.class_room.to_s%></h2>
+       <h2 class="panel-title">上课时间: &nbsp;&nbsp;<%= @course.course_time.to_s%> </h2>
+       <h2 class="panel-title">上课周数: &nbsp;&nbsp;<%= @course.course_week.to_s%></h2>
+       <h2 class="panel-title">考试形式: &nbsp;&nbsp;<%= @course.exam_type.to_s%></h2>
+       <h2 class="panel-title">教学方式: &nbsp;&nbsp;<%= @course.teaching_type.to_s%></h2>
+     </div>
+<!--              t.string :teaching_type
+      t.string :exam_type
+      t.string :credit
+      t.integer :limit_num
+      t.integer :student_num, default: 0
+      t.string :class_roo -->
+<div class="panel-heading">
+<h2 class="panel-title">课程描述: &nbsp;&nbsp;<%= @course.description.to_s%></h2>
 
-<p><%= @course.description.to_s %></p>
+
+
+</div>

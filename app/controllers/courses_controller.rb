@@ -69,6 +69,75 @@ class CoursesController < ApplicationController
     end
     @course=tmp
   end
+  # ---------------------course_table----------------------------
+  def showall
+    @courses = current_user.courses
+    temp1=[]
+    temp2=[]
+    temp3=[]
+    temp4=[]
+    temp5=[]
+    temp6=[]
+    temp7=[]
+    @courses.each do |course|
+      temp = timeSplit(course.course_time.to_s,"(")
+      if(temp[0] == "周一")
+      temp1 << course
+      end
+      if(temp[0] == "周二")
+      temp2 << course
+      end
+      if(temp[0] == "周三")
+      temp3 << course
+      end
+      if(temp[0] == "周四")
+      temp4 << course
+      end
+      if(temp[0] == "周五")
+      temp5 << course
+      end
+      if(temp[0] == "周六")
+      temp6 << course
+      end
+      if(temp[0] == "周日")
+      temp7 << course
+      end
+    end
+    @course1 = temp1
+
+    @course2 = temp2
+    @course3 = temp3
+    @course4 = temp4
+    @course5 = temp5
+    @course6 = temp6
+    @course7 = temp7
+
+    @Mon_course = CourseOrder(@course1)
+
+
+end
+
+  # def order_course(variable,num)
+  #         i=num
+  #        while(i<=11) do
+  #         if(i == tmp2[0])
+  #           i=i+tmp2[1].to_i-tmp2[0]
+  #           tmp_course << {"name"=>variable.name,"time"=>variable.course_time,"location"=>variable.class_room}
+  #         else
+  #           tmp_course << {"name"=>" ","time"=>" ","location"=>" "}
+  #         end
+  #        end
+  # end
+
+
+
+
+  # ----------------------course_table------------------------------
+
+
+
+
+
 
   def describe
     @course = Course.find_by_id(params[:id])
@@ -125,31 +194,9 @@ class CoursesController < ApplicationController
         flash={:danger => "选课人数已满"}
         redirect_to courses_path, flash: flash
       end
+    end
 
-
-
-    # flag = true
-    # @courses = current_user.courses
-    # @course=Course.find_by_id(params[:id])
-    # # @degree_course = params[:choice]
-    # # if(!@degree_course)
-    # #   flash={:danger => "#{@degree_course}"}
-    # #   redirect_to courses_path,flash:flash
-    # # elsif
-    #  @courses.each do |i|
-    #   temp = timeSplit(i.course_time.to_s,"(")##weekday
-    #   temp1 = timeSplit(temp[1].to_s,")")###9-11
-    #   temp2 = timeSplit(@course.course_time.to_s,"(")
-    #   temp3 = timeSplit(temp2[1].to_s,")")##7-9
-    #   temp4 = timeSplit(temp1[0].to_s,"-")
-    #   temp5 = timeSplit(temp3[0].to_s,"-")
-    #   temp6 = searchTime(temp4[0].to_i,temp4[1].to_i,temp5[0].to_i,temp5[1].to_i)
-    #    if(temp[0] == temp2[0] && temp6 )
-    #     flash[:danger] = "time     conflict"                                                                                                                                                                                                  
-    #     flag = nil
-    #     redirect_to courses_path
-    #    end
- end    
+    
 
   def quit
     @course=Course.find_by_id(params[:id])
@@ -231,6 +278,35 @@ class CoursesController < ApplicationController
        end
 
     end
+  end
+
+
+
+   def CourseOrder(str1)
+    tmp_course=[]
+    i=1
+    while(i<11) do
+      str1.each do |course|
+        tmp  = timeSplit(course.course_time.to_s,"(")##weekday
+        tmp1 = timeSplit(tmp[1].to_s,")")##9-11
+        tmp2 = timeSplit(tmp1[0].to_s,"-")
+        count = tmp2[1].to_i-tmp2[0].to_i+1
+          if(i == tmp2[0].to_i)
+            i=i+count
+            while(count>0)
+            tmp_course << {:name=> course.name}
+            count=count-1
+            end
+
+          # elsif(i>tmp2[0].to_i&&i<=tmp2[1].to_i)
+          #   tmp_course << {:name=> course.name}
+          else
+            tmp_course << {:name=>""}
+            i = i+1
+          end
+        end
+    end
+    return tmp_course
   end
 
 

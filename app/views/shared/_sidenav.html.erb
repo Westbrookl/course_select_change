@@ -59,6 +59,7 @@
         <% if teacher_logged_in? %>
             <a data-toggle="collapse" data-parent="#accordion" href="#GradeCollapse"><span class="glyphicon glyphicon-user"></span>
               成绩管理</a>
+
         <% end %>
 
         <% if student_logged_in? %>
@@ -94,4 +95,27 @@
       </div>
     </div>
   </div>
-</div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+       <% if student_logged_in? %>
+            <a data-toggle="collapse" data-parent="#accordion" href="#CourseCollapse"><span class="glyphicon glyphicon-user"></span>
+              显示课程表</a>
+        <% end %>
+       </h4>
+     </div>
+
+        <% if student_logged_in? %>
+            <li class="list-group-item">
+              <%= link_to showall_courses_path do %>
+                  <span class="glyphicon glyphicon-chevron-right"></span> 课程表
+              <% end %>
+            </li>
+        <% end %>
+
+
+    </div>
+</div>    
+
+
