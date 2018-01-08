@@ -26,6 +26,9 @@
               <th>课时/学分</th>
               <th>考试方式</th>
               <th>主讲教师</th>
+              <% if student_logged_in? %>
+              <th>是否为学位课</th>
+              <% end %>
               <th>已选人数</th>
             </tr>
 
@@ -34,29 +37,38 @@
                 <tr>
         
                   <td><%= course.course_code %></td>
-                 <!--  <td><%= course.name %></td> -->
-                  <td><%= link_to course.name,describe_course_path(course)%></td>
+    
+                  <td><%= link_to course.name,describe_course_path(course)%> </td>
+  
                   <td><%= course.credit %></td> 
                   <td><%= course.exam_type %></td>
                   <td><%= course.teacher&.name %></td>
-                  <td><%= course.student_num%></td>
+                  <% if student_logged_in? %>
+                  <td><% if course.course_degree %>是<% else%>否<% end%>
+                  </td>
+                  <% end%>
+                  <td><%= course.student_num%></td>        
                 <!--   add student num -->
                   <% if teacher_logged_in? %>
                       <td><%= link_to "编辑", edit_course_url(course), class: 'btn btn-xs btn-info' %></td>
                       <% if course.open? %>
+                          
                           <td><%= link_to "关闭", close_course_url(course), class: 'btn btn-xs btn-info' %></td>
+                          <td><%= link_to "显示选课学生名单", showstudent_course_url(course) , class: 'btn btn-xs btn-info' %></td>
                       <% else %>
                           <td><%= link_to "开通", open_course_url(course), class: 'btn btn-xs btn-info' %></td>
+                          
                       <% end %>
                       <td><%= link_to "删除", course_path(course), :method => "delete", class: 'btn btn-xs btn-danger', :data => {confirm: '确定要删除此课程?'} %></td>
                   <% elsif student_logged_in? %>
-                      <td><%= link_to "删除", quit_course_path(course), class: 'btn-sm btn-danger' %></td>
+        
+                       <td><%= link_to "删除", quit_course_path(course),  class: 'btn btn-xs btn-danger', :data => {confirm: '确定要删除此课程?'} %></td>
                   <% end %>
                 </tr>
             <% end %>
             </tbody>
           </table>
-          <%= will_paginate @course %>
+
         </div>
       </div>
     </div>

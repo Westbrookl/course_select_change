@@ -69,6 +69,26 @@ class CoursesController < ApplicationController
     end
     @course=tmp
   end
+  #------------------------show student-------------------
+  def showstudent
+    all_students = User.where(:teacher=>false)      
+    @course=Course.find_by_id(params[:id])
+    tmp = [] 
+    num = 0
+    all_students.each do |student|
+      student.courses.each do |course|
+        if(course.name == @course.name && course.course_time == @course.course_time && course.course_week == @course.course_week)
+          tmp << student
+          num += 1
+        end
+      end
+    end
+    @course_student = tmp
+    @course_num = num
+  
+
+  end
+  #------------------------------------------
   # ---------------------course_table----------------------------
   def showall
     @courses = current_user.courses
@@ -103,18 +123,24 @@ class CoursesController < ApplicationController
       temp7 << course
       end
     end
-    @course1 = temp1
-
-    @course2 = temp2
-    @course3 = temp3
-    @course4 = temp4
-    @course5 = temp5
-    @course6 = temp6
-    @course7 = temp7
-
-    @Mon_course = CourseOrder(@course1)
-
-
+    @Mon_course = CourseOrder(temp1)
+    @Thur_course = CourseOrder(temp2)
+    @Wed_course = CourseOrder(temp3)
+    @Thue_course = CourseOrder(temp4)
+    @Fri_course = CourseOrder(temp5)
+    @Sat_course = CourseOrder(temp6)
+    @Sun_course = CourseOrder(temp7)
+    @First = find_course_time(@Mon_course,@Thur_course,@Wed_course,@Thue_course,@Fri_course,@Sat_course,@Sun_course,0)
+    @Second = find_course_time(@Mon_course,@Thur_course,@Wed_course,@Thue_course,@Fri_course,@Sat_course,@Sun_course,1)
+    @Third = find_course_time(@Mon_course,@Thur_course,@Wed_course,@Thue_course,@Fri_course,@Sat_course,@Sun_course,2)
+    @Fourth = find_course_time(@Mon_course,@Thur_course,@Wed_course,@Thue_course,@Fri_course,@Sat_course,@Sun_course,3)
+    @Fifth = find_course_time(@Mon_course,@Thur_course,@Wed_course,@Thue_course,@Fri_course,@Sat_course,@Sun_course,4)
+    @Sixth = find_course_time(@Mon_course,@Thur_course,@Wed_course,@Thue_course,@Fri_course,@Sat_course,@Sun_course,5)
+    @Seventh = find_course_time(@Mon_course,@Thur_course,@Wed_course,@Thue_course,@Fri_course,@Sat_course,@Sun_course,6)
+    @Eighth = find_course_time(@Mon_course,@Thur_course,@Wed_course,@Thue_course,@Fri_course,@Sat_course,@Sun_course,7)
+    @Ninth = find_course_time(@Mon_course,@Thur_course,@Wed_course,@Thue_course,@Fri_course,@Sat_course,@Sun_course,8)
+    @Tenth = find_course_time(@Mon_course,@Thur_course,@Wed_course,@Thue_course,@Fri_course,@Sat_course,@Sun_course,9)
+    @Eleventh = find_course_time(@Mon_course,@Thur_course,@Wed_course,@Thue_course,@Fri_course,@Sat_course,@Sun_course,10)
 end
 
   # def order_course(variable,num)
@@ -149,13 +175,7 @@ end
       flag = nil
       @courses = current_user.courses
       @course = Course.find_by_id(params[:id])
-      #-----------------------------add_degree_course
-      degree_course_value = params[:flag]
-      # flash[:success] = degree_course_value
-      if(degree_course_value)
-      @course.update_attribute(:course_degree,degree_course_value)
-      end
-      #-----------------------
+
        @courses.each do |course|
         temp = timeSplit(course.course_time.to_s,"(")##weekday
         temp1 = timeSplit(temp[1].to_s,")")###9-11  第2-20周
@@ -172,28 +192,38 @@ end
         num14 = now_course_week[1].to_i
         now_course_week_temp = timeSplit(now_course_week[0],"第")
         num13 = now_course_week_temp[1].to_i
-        @temp7 = time_conflict(num11,num12,num13,num14)
+        # @temp7 = time_conflict(num11,num12,num13,num14)
 
-         if(temp[0] == temp2[0] && temp6.nil? && @temp7.nil?)
+         if(temp[0] == temp2[0] && temp6.nil? )#&& @temp7.nil?
            flash[:danger] = "时间冲突"                                                                                                                                                                                                  
            flag = true
            redirect_to courses_path
            break                                                                                                                                                                                             
          end
-
         end
-      if(flag.nil? && @course.student_num <= @course.limit_num && !@temp7.nil?)
+      if(flag.nil? && @course.student_num < @course.limit_num )#&& !@temp7.nil?
         student_num=@course.student_num
         student_num += 1
         @course.update_attribute(:student_num,student_num)
         # @course.student_num = student_num
         current_user.courses<<@course
         flash={:suceess => "成功选择课程: #{@course.name}"}
+          if params[:dc] == 1
+            degree_course_value = true
+            @course.update_attribute(:course_degree,degree_course_value)
+          end
        redirect_to courses_path, flash: flash
-       elsif(@course.student_num > @course.limit_num)
+       elsif(@course.student_num >= @course.limit_num)
         flash={:danger => "选课人数已满"}
         redirect_to courses_path, flash: flash
       end
+      #-----------------------------add_degree_course
+      # degree_course_value = params[:flag]
+      # # flash[:success] = degree_course_value
+      # if(degree_course_value)
+      # @course.update_attribute(:course_degree,degree_course_value)
+      #-----------------------
+ 
     end
 
     
@@ -210,10 +240,10 @@ end
 
 
   #-------------------------for both teachers and students----------------------
-
+##.paginate(page: params[:page], per_page: 4)
   def index
-    @course=current_user.teaching_courses.paginate(page: params[:page], per_page: 4) if teacher_logged_in?
-    @course=current_user.courses.paginate(page: params[:page], per_page: 4) if student_logged_in?
+    @course=current_user.teaching_courses if teacher_logged_in?
+    @course=current_user.courses if student_logged_in?
     total_scores = 0
     total_degree_score = 0
      @course.each do |course|
@@ -225,6 +255,27 @@ end
      end
      @total_scores =total_scores
      @total_degree_score = total_degree_score
+   #   i = 10
+   #  while(i>0)
+   #  all_students = User.where(:teacher=>false)      
+   #  @course1=Course.find_by_id(i)
+   #  num = 0
+   #  all_students.each do |student|
+   #    student.courses.each do |course|
+   #      if(course.name == @course1.name && course.course_time == @course1.course_time && course.course_week == @course1.course_week)
+   #        num += 1
+   #      end
+   #    end
+   #  end
+   #  @course1.update_attribute(:student_num,num)
+   #  i=i-1
+   # end
+  
+
+ 
+  
+
+
   end
 
 
@@ -284,19 +335,29 @@ end
 
    def CourseOrder(str1)
     tmp_course=[]
-    i=1
-    while(i<11) do
+    if(str1.length == 0)
+     a = 0
+     while(a<11)
+      tmp_course <<{:name=>""}
+      a=a+1
+     end
+
+     return tmp_course
+    else
+      i=1
+    while(i<=11) do
       str1.each do |course|
         tmp  = timeSplit(course.course_time.to_s,"(")##weekday
         tmp1 = timeSplit(tmp[1].to_s,")")##9-11
         tmp2 = timeSplit(tmp1[0].to_s,"-")
         count = tmp2[1].to_i-tmp2[0].to_i+1
-          if(i == tmp2[0].to_i)
-            i=i+count
+        count1 = count
+          if(i == tmp2[0].to_i) 
             while(count>0)
             tmp_course << {:name=> course.name}
             count=count-1
             end
+            i=i+count1
 
           # elsif(i>tmp2[0].to_i&&i<=tmp2[1].to_i)
           #   tmp_course << {:name=> course.name}
@@ -308,7 +369,18 @@ end
     end
     return tmp_course
   end
-
+end
+    def find_course_time(str1,str2,str3,str4,str5,str6,str7,num)
+      class_time = []
+      class_time << str1[num]
+      class_time << str2[num]
+      class_time << str3[num]
+      class_time << str4[num]
+      class_time << str5[num]
+      class_time << str6[num]
+      class_time << str7[num]
+      return class_time
+    end
 
 
 end

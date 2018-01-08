@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
   # end
     def create
     user = User.find_by(email: login_params[:email].downcase)
-    if user && user.authenticate(login_params[:password])
+    if user && user.authenticate(login_params[:password]) 
       log_in user
       params[:session][:remember_me] == '1' ? remember_user(user) : forget_user(user)
       flash= {:info => "欢迎回来: #{user.name} :)"}

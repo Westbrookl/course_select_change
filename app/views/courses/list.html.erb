@@ -16,7 +16,6 @@
 
             <tr>
               <th>课程编号</th>
-              <th>是否为学位课</th>
               <th>课程名称</th>
               <th>课时/学分</th>
               <th>限选</th>
@@ -25,17 +24,18 @@
               <th>授课方式</th>
               <th>考试方式</th>
               <th>主讲教师</th>
+              <th>是否为学位课</th>
 
             </tr>
             </thead>
             <tbody>
-
+              
             <% @course.each do |course| %>
                 <tr>
 
                   <td><%= course.course_code %></td>
-                  <td><input id="checkbox1" type="checkbox" name="degree course" value ="true"/>是</td>
-                  <td><%= course.name %></td>
+                <!--   <td><input id="checkbox1" type="checkbox" name="degree course" value ="true"/>是</td> -->
+                  <td><%= link_to course.name,describe_course_path(course)%></td>
                   <td><%= course.credit %></td>
                   <td><%= course.limit_num %></td>
                   <td><%= course.student_num %></td>
@@ -43,11 +43,19 @@
                   <td><%= course.teaching_type %></td>
                   <td><%= course.exam_type %></td>
                   <td><%= course.teacher.name %></td>
-                  <input type="hidden" id="course" value="<%= course.id %>">
-                  <td><input id="button1" type="button" class="btn-sm btn-info" value="加入课程" onclick = "ci()"></td> 
+                  <!-- <input type="hidden" id="course" value=<%= course.id %>/> -->
+    <!--               <td><input id="button1" type="button" class="btn-sm btn-info" value="加入课程" onclick = "ci(i)"/></td>  -->
        <!--            <td><%= link_to "加入课程", select_course_path(course), class: 'btn-sm btn-info' %></td> -->
-
-                </tr>
+                  <td>
+                      <%= form_tag(select_course_path(course),method:"post") do |f| %>
+                          &nbsp&nbsp&nbsp&nbsp&nbsp
+                          <%= check_box_tag(:dc) %> </td>
+                  <td>
+                          <%= submit_tag"加入课程",class: 'btn btn-xs btn-primary',
+                              :style=>"font-size:15px;"%>
+                          <% end %>
+                  </td>
+                    </tr>
             <% end %>
             </tbody>
           </table>
@@ -58,13 +66,12 @@
 </div>
 <script type="text/javascript">
   flag = false;
-  function ci(){
+  function ci(x){
     var InputNum=document.getElementsByTagName("input")
         for (var i=0;i<InputNum.length;i++){
           if(InputNum[i].checked)
             flag=true;
-            }
-    var course= document.getElementById("course").value;
+    var course= document.getElementById("course"+x).value;
 
   window.location.href= "http://localhost:3000/courses/"+course+"/select?flag="+flag;
   // alert("http://localhost:3000/courses/"+course+"/select/course?"+flag);
@@ -74,5 +81,4 @@
     }
 
 </script>
-
 
