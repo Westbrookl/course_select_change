@@ -202,18 +202,21 @@ end
          end
         end
       if(flag.nil? && @course.student_num < @course.limit_num )#&& !@temp7.nil?
+         if params[:flag] == true
+             degree_course_value = true
+             @course.update_attribute(:course_degree,degree_course_value)
+         end
         student_num=@course.student_num
         student_num += 1
         @course.update_attribute(:student_num,student_num)
-        # @course.student_num = student_num
         current_user.courses<<@course
         flash={:suceess => "成功选择课程: #{@course.name}"}
-          if params[:dc] == 1
-            degree_course_value = true
-            @course.update_attribute(:course_degree,degree_course_value)
-          end
+          # if params[:dc] == 1
+          #   degree_course_value = true
+          #   @course.update_attribute(:course_degree,degree_course_value)
+          # end
        redirect_to courses_path, flash: flash
-       elsif(@course.student_num >= @course.limit_num)
+       else
         flash={:danger => "选课人数已满"}
         redirect_to courses_path, flash: flash
       end
@@ -252,6 +255,21 @@ end
       if(course.course_degree)
         total_degree_score += temp[1].to_i
       end
+    #------------------------------all students----------
+    all_students = User.where(:teacher=>false)
+    if(course.student_num == 0)
+    num = 0
+    all_students.each do |student|
+      student.courses.each do |course1|
+        if(course1.name == course.name && course1.course_time == course.course_time )
+          num += 1
+          end
+        end
+    end
+    course.update_attribute(:student_num,num)
+  end
+    #---------------------------------------------------------
+      
      end
      @total_scores =total_scores
      @total_degree_score = total_degree_score

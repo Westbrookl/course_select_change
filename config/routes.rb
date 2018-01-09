@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   resources :courses do
     member do
-      post :select
+      get :select
       get :quit
       get :open
       get :close

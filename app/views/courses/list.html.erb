@@ -33,7 +33,7 @@
             <% @course.each do |course| %>
                 <tr>
 
-                  <td><%= course.course_code %></td>
+                  <td><%= i=course.course_code %></td>
                 <!--   <td><input id="checkbox1" type="checkbox" name="degree course" value ="true"/>是</td> -->
                   <td><%= link_to course.name,describe_course_path(course)%></td>
                   <td><%= course.credit %></td>
@@ -43,9 +43,13 @@
                   <td><%= course.teaching_type %></td>
                   <td><%= course.exam_type %></td>
                   <td><%= course.teacher.name %></td>
-                  <!-- <input type="hidden" id="course" value=<%= course.id %>/> -->
-    <!--               <td><input id="button1" type="button" class="btn-sm btn-info" value="加入课程" onclick = "ci(i)"/></td>  -->
-       <!--            <td><%= link_to "加入课程", select_course_path(course), class: 'btn-sm btn-info' %></td> -->
+                  <td><input id="checkbox1" type="checkbox" name="degree course" value ="true"/>是</td>
+                  <input type="hidden" id=<%= course.id.to_i%> value=<%= course.id.to_i%> /> 
+                  <td><input id="button1" type="button" class="btn-sm btn-info" value="加入课程" onclick = "ci(<%= course.id.to_i%>)"/></td> 
+              <!--   <td><%= link_to "加入课程", select_course_path(course), class: 'btn-sm btn-info' %></td>  -->
+
+<!-- 
+       #--------------------By xzh
                   <td>
                       <%= form_tag(select_course_path(course),method:"post") do |f| %>
                           &nbsp&nbsp&nbsp&nbsp&nbsp
@@ -55,6 +59,7 @@
                               :style=>"font-size:15px;"%>
                           <% end %>
                   </td>
+      #---------------------------------- -->
                     </tr>
             <% end %>
             </tbody>
@@ -64,21 +69,16 @@
     </div>
   </div>
 </div>
-<script type="text/javascript">
+ <script type="text/javascript">
   flag = false;
   function ci(x){
     var InputNum=document.getElementsByTagName("input")
         for (var i=0;i<InputNum.length;i++){
           if(InputNum[i].checked)
             flag=true;
-    var course= document.getElementById("course"+x).value;
-
+    var course= document.getElementById(x).value;
   window.location.href= "http://localhost:3000/courses/"+course+"/select?flag="+flag;
-  // alert("http://localhost:3000/courses/"+course+"/select/course?"+flag);
-
-
-          
     }
-
-</script>
+}
+</script> 
 
