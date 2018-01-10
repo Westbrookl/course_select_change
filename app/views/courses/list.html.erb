@@ -69,7 +69,7 @@
     </div>
   </div>
 </div>
- <script type="text/javascript">
+<script type="text/javascript">
   flag = false;
   function ci(x){
     var InputNum=document.getElementsByTagName("input")
@@ -77,7 +77,8 @@
           if(InputNum[i].checked)
             flag=true;
     var course= document.getElementById(x).value;
-  window.location.href= "http://localhost:3000/courses/"+course+"/select?flag="+flag;
+  window.location.href="http://111.230.224.216:8080/courses/"+ course+"/select?flag="+flag;
+
     }
 }
 </script> 
