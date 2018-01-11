@@ -32,7 +32,7 @@
                   <td><%= grade.user.name %></td>
                   <td><%= grade.user.major %></td>
                   <td><%= grade.user.department %></td>
-                  <td><%= grade.course.name %></td>
+                  <td><%= grade.course.id %></td> 
                   <td><%= grade.grade %></td>
 
                   <% if teacher_logged_in? %>
@@ -46,7 +46,7 @@
             <% end %>
             </tbody>
           </table>
-          <%= will_paginate @grades %>
+    <!--       <%= will_paginate @grades %> -->
         </div>
       </div>
     </div>

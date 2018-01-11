@@ -1,35 +1,35 @@
  <div class="container">
 
 
-  <div class="row">
-    <div class="col-md-8" style="background-color: #18BC9C;padding-bottom: 10px;padding-top: 10px">
+  <div class="row-5" "><!-- style="background-color: #87cefa;padding-bottom: 10px;padding-top: 10px -->
+    <div class="col-md-6" >
       <div style="font-size: 50px; padding-left: 50px">
-        <%= image_tag "1.png" %>
-        Learning RoR!
+       <img src="/assets/1"/>
+      
       </div>
 
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-6">
       <h1>在线选课系统样本</h1>
       <p>这个样本系统是基于国科大研究生课程(高级软件工程)开发的项目,目的是帮助入门者学习RoR(Ruby on Rails),这是适合新学者的入手的第一个项目</p>
-      <p>入门者可以在这个样本系统上增加更多的功能:</p>
+      <p>系统已有功能:</p>
       <ul>
 
-        <li class="text-danger">
+        <li >
           处理选课冲突、控制选课人数
         </li>
-        <li class="text-danger">
+        <li >
           统计选课学分,增加选课的开放、关闭功能
         </li>
-        <li class="text-danger">
-          自定义管理员后台
+        <li >
+          导出学生课表
         </li>
-        <li class="text-danger">
-          基于OAuth的授权登陆
+        <li >
+          导出选课学生基本信息
         </li>
-        <li class="text-danger">
-          Excel格式的数据导入
+        <li >
+          课程详情
         </li>
       </ul>
 
@@ -38,11 +38,10 @@
   </div>
 
   <hr>
-
-  <div class="row">
+ <div class="row">
     <div class="col-lg-12">
       <div class="alert alert-info text-center">
-        开发此项目,你需要具备以下的知识:
+        校园信息链接
       </div>
     </div>
 
@@ -50,26 +49,58 @@
 
 
   <div class="row">
-    <div class="col-md-4">
-      <h2>Bootstrap</h2>
-      <p>Bootstrap，来自 Twitter，是目前很受欢迎的前端框架。Bootstrap 是基于 HTML、CSS、JAVASCRIPT 的，它简洁灵活，使得 Web 开发更加快捷. 它由Twitter的设计师Mark
-        Otto和Jacob Thornton合作开发，是一个CSS/HTML框架。Bootstrap提供了优雅的HTML和CSS规范，它即是由动态CSS语言Less写成。</p>
-      <a class="btn btn-info" href="http://www.w3schools.com/bootstrap/">More Info</a>
-    </div>
+    <div class="col-md-6">
+      <h3 class="panel-head-title"><span>快速通道</span></h3>
+            <img src="/assets/xinxi.png" usemap="#Map5"/>
+             <map name="Map5">
+              <area shape="rect" coords="6,8,94,227" href="http://service.ucas.ac.cn/" target="_blank" title="校园服务" >
+              <area shape="rect" coords="108,9,334,100" href="http://sep.ucas.ac.cn/" target="_blank" title="信息门户">
+              <area shape="rect" coords="350,7,426,154" href="http://job.ucas.ac.cn/" target="_blank" title="就业信息">
+              <area shape="rect" coords="108,106,333,155" href="http://www.cas.cn/" target="_blank" title="中国科学院" >
+              <area shape="rect" coords="110,170,235,224" href="http://lib.ucas.ac.cn/" target="_blank" title="图书馆">
+              <area shape="rect" coords="251,172,420,227" href="/site/229" target="_blank" title="校长信箱">
+          </map>    </div>
 
-    <div class="col-md-4">
+<!--     <div class="col-md-4">
       <h2>Javascript/CSS</h2>
       <p>JavaScript一种直译式脚本语言,广泛用于客户端的脚本语言,是一种动态类型、弱类型、基于原型的语言，内置支持类型，最早是在HTML（标准通用标记语言下的一个应用）网页上使用，用来给HTML网页增加动态功能。CSS
         (Cascading Style Sheets)是一种用来表现HTML样式的样式语言,能够真正做到网页表现与内容分离。
       </p>
       <a class="btn btn-info" href="http://www.runoob.com/js/js-tutorial.html">More Info</a>
-    </div>
+    </div> -->
 
-    <div class="col-md-4">
-      <h2>Rails Framework</h2>
-      <p>Rails基于MVC（模型- 视图- 控制器）设计模式。从视图中的Ajax应用，到控制器中的访问请求和反馈，到封装数据库的模型，Rails
-        为你提供一个纯Ruby的开发环境,它基于一种计算机软件语言Ruby,给程序开发人员提供了强大的框架支持。Rails结合了PHP体系的优点（快速开发）和Java体系的优点（程序规整）</p>
-      <a class="btn btn-info" href="http://guides.ruby-china.org/">More Info</a>
+    <div class="col-md-6">
+     <h3 class="panel2-head-title"><span>校园活动</span></h3>
+        <ul class="home-activity-list">
+        
+          <li>
+            <div class="hal-date">
+              
+              <span class="hd">01.16</span>
+            </div>
+            <a class="hal-title" title="【科苑经管国际学术论坛】科研之友：协同创新网络服务" href="/site/87?a=6c7df663e7874160b91a2805b236ce90" target="_blank">&#12304;&#31185;&#33489;&#32463;&#31649;&#22269;&#38469;&#23398;&#26415;&#35770;&#22363;&#12305;&#31185;&#30740;&#20043;&#21451;&#65306;&#21327;&#21516;&#21019;&#26032;&#32593;&#32476;...</a>
+            <p class="hal-inf">主讲人：马建教授 香港城市大学商学院&nbsp;&nbsp;地点：中国科学院数学与系统科学研究院南楼219</p>
+          </li>
+        
+          <li>
+            <div class="hal-date">
+              
+              <span class="hd">01.13</span>
+            </div>
+            <a class="hal-title" title="“走近科学”系列讲座：集成电路产业与技术" href="/site/87?a=833fc2b8a0ee441593a7b90633daffd4" target="_blank">&ldquo;&#36208;&#36817;&#31185;&#23398;&rdquo;&#31995;&#21015;&#35762;&#24231;&#65306;&#38598;&#25104;&#30005;&#36335;&#20135;&#19994;&#19982;&#25216;&#26415;</a>
+            <p class="hal-inf">主讲人：王文武研究员 中国科学院微电子研究所所长助理、集成电路先导工艺研发中心主任&nbsp;&nbsp;地点：玉泉路校区阶一（1）</p>
+          </li>
+        
+          <li>
+            <div class="hal-date">
+              
+              <span class="hd">01.11</span>
+            </div>
+            <a class="hal-title" title="明德讲堂M465：未来生物科技与军队战斗力" href="/site/87?a=ba35c9045997416aa4a1a738afb4fd84" target="_blank">&#26126;&#24503;&#35762;&#22530;M465&#65306;&#26410;&#26469;&#29983;&#29289;&#31185;&#25216;&#19982;&#20891;&#38431;&#25112;&#26007;&#21147;</a>
+            <p class="hal-inf">主讲人：雷二庆&nbsp;&nbsp;地点： 雁栖湖 教1-107</p>
+          </li>
+          
+        </ul>
     </div>
   </div>
 </div>
