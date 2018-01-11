@@ -1,22 +1,5 @@
-# CourseSelect [![Build Status](https://travis-ci.org/PENGZhaoqing/CourseSelect.svg?branch=master)](https://travis-ci.org/PENGZhaoqing/CourseSelect)
-
-### [中文教程1](http://blog.csdn.net/ppp8300885/article/details/52594839) [中文教程2](http://blog.csdn.net/ppp8300885/article/details/52601560) [中文教程3](http://blog.csdn.net/ppp8300885/article/details/52669749) [Wiki](https://github.com/PENGZhaoqing/CourseSelect/wiki)
-
-
-这个样本系统是基于国科大研究生课程 (高级软件工程) 开发的项目,目的是帮助入门者学习RoR (Ruby on Rails),
-
-适合新学者的入手的第一个项目 ([演示Demo戳这里](https://courseselect.herokuapp.com/ ))，入门者可以在这个样本系统上增加更多的功能:
-
-* 处理选课冲突、控制选课人数
-* 统计选课学分，学位课等
-* 增加选课的开放、关闭功能
-* 自定义管理员后台
-* 基于OAuth的授权登陆
-* Excel格式的数据导入
-* 绑定用户邮箱（实现注册激活，忘记密码等）
-* 站内查找检索 （课程按分类查找，过滤等）
-
-### 目前功能：
+基于高级软件工程的提供的选课系统，对选课系统增加了一些功能。
+### 原有功能：
 
 * 多角色登陆（学生，老师，管理员）
 * 学生动态选课，退课
@@ -24,7 +7,15 @@
 * 老师对课程下的学生添加、修改成绩
 * 权限控制：老师和学生只能看到自己相关课程信息
 
-**如果觉得好，给项目点颗星吧～**
+
+
+###新加功能
+* 处理选课冲突、控制选课人数
+* 统计选课学分，学位课等
+* 显示个人课表
+* 显示出选课学生的个人信息
+* 详细介绍课程详情的页面
+* 显示出选课人数
 
 ### 截图
 
@@ -35,6 +26,18 @@
 <img src="/lib/screenshot3.png" width="700">   
 
 <img src="/lib/screenshot4.png" width="700">
+<img src="/lib/图片1.png" width="700"> 
+<img src="/lib/图片2.png" width="700"> 
+<img src="/lib/图片3.png" width="700"> 
+<img src="/lib/图片4.png" width="700"> 
+<img src="/lib/图片5.png" width="700"> 
+<img src="/lib/图片6.png" width="700"> 
+<img src="/lib/图片7.png" width="700"> 
+<img src="/lib/图片8.png" width="700"> 
+<img src="/lib/图片9.png" width="700"> 
+<img src="/lib/图片10.png" width="700"> 
+<img src="/lib/图片11.png" width="700"> 
+<img src="/lib/图片12.png" width="700"> 
 
 ## 说明
 
@@ -88,21 +91,11 @@ $ rails s
 账号中数字都可以替换成2,3...等等
 
 
-## Heroku云部署
+## 云部署
 
-项目可直接在Heroku上免费部署
+项目部署在了腾讯云服务器上
 
-1.fork此项目到自己Github账号下
-
-2.创建Heroku账号以及Heroku app
-
-3.将Heroku app与自己Github下的fork的项目进行连接
-
-4.下载配置[Heroku CLI](https://devcenter.heroku.com/articles/heroku-command-line)命令行工具
-
-5.运行`heroku login`在终端登陆，检查与heroku app的远程连接情况`git config --list | grep heroku`，若未检查到相应的app，请看[这里](http://stackoverflow.com/questions/5129598/how-to-link-a-folder-with-an-existing-heroku-app)
-
-6.运行部署，详情[请戳这里](https://devcenter.heroku.com/articles/getting-started-with-rails4#rails-asset-pipeline)
+公网地址为：http://111.230.224.216:8080/
 
 
 ## 本地测试
