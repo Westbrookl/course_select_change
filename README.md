@@ -1,4 +1,4 @@
-Course select
+# CourseSelect [![Build Status](https://travis-ci.org/Westbrookl/course_select_change.svg?branch=master)
 基于高级软件工程的提供的选课系统，对选课系统增加了一些功能。
 ### 原有功能：
 
