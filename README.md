@@ -14,7 +14,7 @@
 4. 安装Rails
 5. 利用github将项目源码clone到服务器111.230.224.216
 6. 进入项目路径下分别执行bundle install、rake db:migrate、rake db:seed
-7. 启动项目rails server -b 111.230.224.216:8080 &
+7. 启动项目nohup rails s -b 0.0.0.0 -p 8080 & 
 ### 原有功能：
 
 * 多角色登陆（学生，老师，管理员）
