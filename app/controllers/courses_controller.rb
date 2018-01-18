@@ -1,8 +1,8 @@
 class CoursesController < ApplicationController
 
-  before_action :student_logged_in, only: [:select, :quit, :list]
-  before_action :teacher_logged_in, only: [:new, :create, :edit, :destroy, :update, :open, :close]#add open by qiao
-  before_action :logged_in, only: :index
+  # before_action :student_logged_in, only: [:select, :quit, :list]
+  # before_action :teacher_logged_in, only: [:new, :create, :edit, :destroy, :update, :open, :close]#add open by qiao
+  # before_action :logged_in, only: :index
 
   #-------------------------for teachers----------------------
 

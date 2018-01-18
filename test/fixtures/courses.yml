@@ -9,3 +9,26 @@ one: {}
 #
 two: {}
 #  column: value
+
+course1:
+  id: 2
+  name: coursename1
+  open: true
+  course_time: 周三(5-7)
+  course_code: 1
+  course_type: 1
+  teaching_type: 1
+  exam_type: 1
+  credit: 1
+  limit_num: 100
+  class_room: 1
+  course_week: 1
+
+# #  column: value
+
+course2:
+  id: 1
+  name: 计算机体系结构
+  course_code: 091M4001H
+  course_type: 专业核心课
+  teacher: teaer1
