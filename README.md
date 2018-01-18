@@ -58,9 +58,10 @@
 <img src="/lib/图片10.png" width="700"> 
 <img src="/lib/图片11.png" width="700"> 
 <img src="/lib/图片12.png" width="700"> 
+* 数据库设计 保留了原来的数据库模型只是对course添加了字段degree_course和description
+<img src="/lib/database.png" width="700"> 
 * 本地测试
 <img src="/lib/图片13.png" width="700"> 
-
 
 
 
