@@ -26,36 +26,36 @@
 
 
 ### 新加功能
-* 处理选课冲突、控制选课人数
+* 对界面进行了更改
 * 统计选课学分，学位课等
+* 处理选课冲突、控制选课人数
 * 显示个人课表
-* 显示出选课学生的个人信息
+* 显示出选课学生的个人信息以及选课人数
 * 详细介绍课程详情的页面
-* 显示出选课人数
 
 ### 截图
 
-<img src="/lib/screenshot1.png" width="700">  
+<img src="/lib/picture1.png" width="700">  
 
 <img src="/lib/screenshot2.png" width="700">
 
 <img src="/lib/screenshot3.png" width="700">   
 
 <img src="/lib/screenshot4.png" width="700">
-
 * 统计选课学分，学位课等
 <img src="/lib/图片1.png" width="700"> 
-<img src="/lib/图片2.png" width="700"> 
 * 处理选课冲突、控制选课人数
+<img src="/lib/图片3.png" width="700"> 
+<img src="/lib/图片4.png" width="700">
 <img src="/lib/图片5.png" width="700"> 
-<img src="/lib/图片6.png" width="700"> 
-<img src="/lib/图片7.png" width="700"> 
-<img src="/lib/图片8.png" width="700"> 
-
+<img src="/lib/图片6.png" width="700">
 * 显示个人课表
-<img src="/lib/图片10.png" width="700"> 
+<img src="/lib/图片7.png" width="700"> 
+* 显示出选课学生的个人信息以及选课人数
+<img src="/lib/图片8.png" width="700">
 <img src="/lib/图片9.png" width="700"> 
-* 显示出选课人数
+* 详细介绍课程详情的页面
+<img src="/lib/图片10.png" width="700"> 
 <img src="/lib/图片11.png" width="700"> 
 <img src="/lib/图片12.png" width="700"> 
 
